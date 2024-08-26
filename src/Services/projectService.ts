@@ -11,6 +11,9 @@ class ProjectService extends BaseService {
   public async getProjects() {
     return this.get<ProjectType[]>("/Projects/GetProjects");
   }
+  public async getProject(projectId: string) {
+    return this.get<ProjectType>(`/Projects/GetProject/${projectId}`);
+  }
 }
 
 export default new ProjectService();

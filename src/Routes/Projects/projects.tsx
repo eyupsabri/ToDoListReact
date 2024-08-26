@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import projectService from "../../Services/projectService";
 import { ProjectType } from "../../types/Project.type";
 import { formatDate } from "../../Helpers/helpers";
+import { Link } from "react-router-dom";
 
 export default function Projects() {
   const [projects, setProjects] = useState<ProjectType[]>([]);
@@ -75,7 +76,12 @@ export default function Projects() {
                 <Typography variant="subtitle1">{project.createdBy}</Typography>
               </Grid>
               <Grid item xs={2}>
-                <Button variant="contained" sx={{ mr: 2 }}>
+                <Button
+                  component={Link}
+                  variant="contained"
+                  sx={{ mr: 2 }}
+                  to={`/projects/${project.projectId}`}
+                >
                   View
                 </Button>
                 <Button variant="contained">Delete</Button>
@@ -87,6 +93,11 @@ export default function Projects() {
             <Typography variant="h6">No projects found</Typography>
           </Box>
         )}
+      </Box>
+      <Box sx={classes.fixedButton}>
+        <Button variant="contained" color="primary">
+          Create Project
+        </Button>
       </Box>
     </Container>
   );

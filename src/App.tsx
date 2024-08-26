@@ -9,6 +9,11 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import Projects from "./Routes/Projects/projects";
 import ProtectedRoute from "./Routes/ProtectedRoute/protectedRoute";
+import Project from "./Routes/Project/project";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 
 const persistor = persistStore(store);
 
@@ -25,17 +30,25 @@ const router = createBrowserRouter([
         path: "/projects",
         element: <ProtectedRoute children={<Projects />} />,
       },
+      {
+        path: "/projects/:projectId",
+        element: <ProtectedRoute children={<Project />} />,
+      },
     ],
   },
 ]);
 
 function App() {
   return (
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <RouterProvider router={router} />
-      </PersistGate>
-    </Provider>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <DndProvider backend={HTML5Backend}>
+        <Provider store={store}>
+          <PersistGate persistor={persistor}>
+            <RouterProvider router={router} />
+          </PersistGate>
+        </Provider>
+      </DndProvider>
+    </LocalizationProvider>
   );
 }
 

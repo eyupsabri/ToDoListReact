@@ -18,4 +18,9 @@ export const useStyles = (theme: Theme): { [key: string]: SxProps } => ({
     borderBottom: "1px solid #ccc",
     p: 1,
   },
+  fixedButton: {
+    position: "fixed",
+    bottom: 30,
+    right: 30,
+  },
 });
